@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>JoyStick</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="icon" type="image/x-icon" href="assets/icon.png">
+  <link rel="stylesheet" href="styles-home.css">
+</head>
+<body>
+  <div class="circle"></div>
+
+  <div id="loading-screen">
+    <img src="assets/loadingbg.jpg" alt="">
+    <div class="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <div class="toggle-container">
+    <input type="checkbox" id="toggle-button" class="toggle-button">
+    <label for="toggle-button" class="toggle-label"> <i class='bx bxs-cart-alt'></i> </label>
+
+    <aside class="cart-panel">
+      <h3 class="selected-items-header">
+        Selected Items
+        <label for="toggle-button" class="toggle-label"> 
+            <span><i class='bx bxs-cart-alt'></i></span> 
+        </label>
+      </h3>
+    <hr>
+    <div class="checkeditems-container">
+      <ul id="checked-items"></ul><br>
+      <div class="No-items">Cart Empty</div>
+      <!--Automatic Display of all selected items in the collections-->
+    </div>
+    <hr>
+        <div class="total-amount">Total Amount: Php. <span id="total-amount-value">0.00</span></div>
+        <div class="pay">
+            <button class="pay-button">
+              Pay
+              <svg viewBox="0 0 576 512" class="svgIcon"><path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path></svg>
+            </button>
+        </div>
+    </aside>
+  </div>
+
+  <div class="cover"></div>
+
+  <div class="panel hide" id="payment-panel">
+    <button class="close-btn" id="close-payment-panel">×</button>
+    <div class="panel-content">
+        <h2>Payment Information</h2>
+        <hr>
+        <div class="total-amount">
+            Total Amount: Php. <span id="display-amount-value">0.00</span>
+        </div>
+        <input class="transaction" type="text" id="user-id" placeholder="Enter Valorant User ID" required>
+        <div class="payment-methods">
+            <label>
+                <input type="radio" name="payment-method" value="card">
+                <span class="custom-radio">Credit/Debit Card</span>
+            </label>
+            <label>
+                <input type="radio" name="payment-method" value="paypal">
+                <span class="custom-radio">PayPal</span>
+            </label>
+            <label>
+                <input type="radio" name="payment-method" value="gcash">
+                <span class="custom-radio">GCash</span>
+            </label>
+        </div>
+        <hr>
+        <div id="payment-form-container">
+            <form id="card-form" class="payment-form hide">
+                <h3>Credit/Debit Card Payment</h3>
+                <p>Use your Credit/Debit account to complete the payment.</p>
+                <input class="transaction" type="text" placeholder="Card Number" required>
+                <input class="transaction" type="text" placeholder="Card Holder Name" required>
+                <input class="transaction" type="text" placeholder="Expiry Date (MM/YY)" required>
+                <input class="transaction" type="text" placeholder="CVV" required>
+                <button type="button" class="next-payment-details">Next</button>
+            </form>
+            <form id="paypal-form" class="payment-form hide">
+                <h3>PayPal Payment</h3>
+                <p>Use your PayPal account to complete the payment.</p>
+                <input class="transaction" type="text" placeholder="Paypal Account Number" required>
+                <button type="button" class="next-payment-details">Next</button>
+            </form>                
+            <form id="gcash-form" class="payment-form hide">
+                <h3>GCash Payment</h3>
+                <p>Use your GCash account to complete the payment.</p>
+                <input class="transaction" type="text" placeholder="GCash Mobile Number" required>
+                <button type="button" class="next-payment-details">Next</button>
+            </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="details-panel" class="panel hide">
+    <div class="panel-content">
+        <h2>Payment Details</h2>
+        <p>User ID: <span id="display-user-id"></span></p>
+        <p>Selected Payment Method: <span id="display-payment-method"></span></p>
+        <hr>
+        <ul id="detail-items"></ul>
+        <hr>
+        <p>Total Amount: Php. <span id="display-total-amount"></span></p>
+        <p>Transaction Number: <span id="transaction-number"></span></p>
+        <button id="confirm-payment">Confirm</button>
+        <button id="cancel-payment">Cancel</button>
+    </div>
+  </div>
+
+  <div id="receipt-panel" class="panel hide">
+    <div class="receipt">
+        <h2>Receipt</h2>
+        <div class="receipt-content">
+            <p>Thank you for your payment!</p>
+            <hr>
+            <p>User ID: <span id="receipt-user-id"></span></p>
+            <p>Payment Method: <span id="receipt-payment-method"></span></p>
+            <hr>
+            <ul id="receipt-items"></ul>
+            <hr>
+            <p>Total Amount: Php. <span id="receipt-total-amount"></span></p>
+            <p>Transaction Number: <span id="receipt-transaction-number"></span></p>
+        </div>
+        <button id="download-receipt" class="receipt-button">Download Receipt</button>
+    </div>
+  </div>
+
+  <div class="navbar">
+    <div class="navbar-menu-left">
+      <ul class="navbar-menu">
+        <li><a href="#Home">Home</a></li>
+        <li><a href="#About">About Us</a></li>
+        <li><a href="#Featured">Featured</a></li>
+      </ul>
+    </div>
+    <a href="#"><div class="navbar-logo"><h1><i class='bx bx-joystick-button'></i><span>J</span>oy<span>S</span>tick</h1></div></a>
+    <div class="navbar-menu-right">
+      <ul class="navbar-menu">
+        <li><a href="#Products">Shop</a></li>
+        <li><a href="#Contacts">Contacts</a></li>
+        <li><a onclick="logout()" style="cursor: pointer;" id="Logout">Logout<i class='bx bx-exit' style='position: absolute; font-size: 25px; line-height: 22px;' ></i></a></li>
+        <li>ㅤ</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="Home" id="Home">
+    <div class="H-content">
+      <video id="myVideo" autoplay muted style="width: 100%;">
+        <source src="assets/yt5s.io-Enter the Tigris __ VALORANT Lunar New Year 2022-(1080p).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <h1>PLAY VALORANT WITH JOY</h1>
+    </div>
+  </section>
+
+  <div id="About" style="top: 126%; position: absolute;"></div>
+
+  <section class="About" id="About">
+    <h2>About JoyStick</h2>
+    <img class="image-astra" src="assets/astra_design.png" alt="">
+    <div class="about-content">
+      <div class="about-box-one">
+        <p> We are sellers, ensuring secure and seamless trades. Our mission is to provide a reliable platform for all your Valorant skin needs.</p>
+        <img class="image-phoenix " src="assets/phoenix_design.png" alt="">
+      </div>
+      <div class="about-box-two">
+        <h3>&#62 THIS IS JOYSTICK &#60</h3>
+        <p>Welcome to JoyStick ValoCosmetic Store, your one-stop destination for premium cosmetic items in Valorant. We are passionate gamers who understand the importance of expressing yourself through your in-game appearance.
+          At JoyStick ValoCosmetic Store, we curate a wide range of skins, weapon charms, and other cosmetic items to enhance your gaming experience. Whether you're looking for the latest bundle or a rare skin, we've got you covered.
+          We will provide Valorant players with high-quality cosmetic items at affordable prices. We strive to create a seamless shopping experience, offering fast and secure transactions.
+          </p>
+      </div>
+      <div class="about-box-three">
+        <a href="#Contacts"><div class="about-button" style="border-radius: 10px 0px 0px 10px;"><span class="text">Find Us</span><span>Go to Contacts</span></div></a>
+        <a href="#Products"><div class="about-button" style="border-radius: 0px 10px 10px 0px;"><span class="text">Products</span><span>Shop Now!</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="Featured" id="Featured">
+    <table>
+      <td>
+        <div class="Feature_cards">
+          <div class="Feature_card one">
+            <div class="Feature_cardDetails">
+              <div class="Feature_cardDetailsHaeder">Blast-X</div>
+              <a href="#Products"><div class="Feature_cardDetailsButton">Buy Now</div></a>
+            </div>
+          </div>
+          <div class="Feature_card two">
+            <div class="Feature_cardDetails">
+              <div class="Feature_cardDetailsHaeder">Prime</div>
+              <a href="#Products"><div class="Feature_cardDetailsButton">Buy Now</div></a>
+            </div>
+          </div>
+          <div class="Feature_card three">
+            <div class="Feature_cardDetails">
+              <div class="Feature_cardDetailsHaeder">Kuronami</div>
+              <a href="#Products"><div class="Feature_cardDetailsButton">Buy Now</div></a>
+            </div>
+          </div>
+          <div class="Feature_card four">
+            <div class="Feature_cardDetails">
+              <div class="Feature_cardDetailsHaeder">Mystbloom</div>
+              <a href="#Products"><div class="Feature_cardDetailsButton">Buy Now</div></a>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="Featured_texts">
+          <h1>FEATURED</h1>
+          <hr>
+          <p>Check out our latest featured products. From Blast-X to Mystbloom, discover premium quality cosmetics designed just for you. Don't miss out on these exclusive offerings!</p>
+        </div>
+      </td>
+    </table>
+  </section>
+
+  <div id="Products" style="top: 349%; position: absolute;"></div>
+  <section class="Products" id="Products">
+    <div class="txt-products">VALORANT COSMETICS</div>
+    <div class="container-products">
+      <header class="product-headers">
+        <div class="shop-section">
+          <h2>&#62&#62 Collections &#60&#60</h2>
+        </div>
+        <div class="search-section">
+          <h2>&#62&#62 Search &#60&#60</h2>
+        </div>
+      </header>
+      <main class="shop">
+        <section class="left-shop">
+          <div class="product-grid" id="product-grid">
+            <!--Automatic Display of Items-->
+          </div>        
+        </section>
+        <section class="right-shop">
+          <div class="search-container-input">
+            <input type="text" placeholder="Search products..." id="search-bar" class="search-input">
+            <i class='bx bx-search-alt'></i>
+          </div>
+          <br><br><br>
+          <div id="search-result">
+            <i class='bx bx-search-alt-2'></i>
+          </div>
+        </section>
+      </main>
+    </div>
+  </section>
+
+  <section class="Contacts" id="Contacts">
+    <h1>&#60&#60 Get In Touch &#62&#62</h1> 
+
+    <div class="contacts-details">
+     <p style="text-align: justify;"><h3>Note:</h3> This website is made purely for educational purposes. This is not an official website of Valorant and
+      this is made through the use of vanilla html, css, and javascript. Hope you enjoy look through this sample/template of a website for ecommerce
+      about Valorant game cosmetics. Thank you for choosing JoyStick ValoCosmetic Store. Join us in elevating your gameplay with style!
+      </p>
+      <hr style="width:50%;text-align:left;margin-left:0">
+      <h3>Contact Us</h3>
+      <p>Tele. No.: (02) 1234-5678</p>
+      <p>Cell. No.: 0917-123-4567</p>
+      <h3>Mail Us</h3>
+      <p>Address: 1234 Mabini Street, Malate, Manila, 1004 Metro Manila, Philippines</p>
+      <p>G-Mail: JoyStick_2024@gmail.com</p>
+      <p>Yahoo: JoyStick_2024@yahoo.com</p>
+    </div>
+
+    <div class="contacts-contacts">
+      <h3>Message Us Now</h3>
+      <div class="message-me-container">
+        <message-me class="message-me">
+          <div class="message-me-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required="">
+            <br>
+            <label for="email">Your Email</label>
+            <input type="text" id="email" name="email" required="">
+          </div>
+          <div class="message-me-group">
+            <label for="textarea">How Can We Help You?</label>
+            <textarea name="textarea" id="textarea" rows="10" cols="50" required="">
+            </textarea>
+          </div>
+          <button class="message-me-submit-btn" type="submit">Submit</button>
+        </message-me>
+      </div>    
+    </div>
+
+    <div class="contacts-socials">
+      <div class="social-card">
+        <a class="socialContainer containerOne" href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+          <i class='bx bxl-instagram sociali'></i>
+          <div class="tooltip">Instagram</div>
+        </a>
+        <a class="socialContainer containerTwo" href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+          <i class='bx bxl-twitter sociali'></i>
+          <div class="tooltip">Twitter</div>
+        </a>          
+        <a class="socialContainer containerThree" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+          <i class='bx bxl-facebook sociali'></i>
+          <div class="tooltip">Facebook</div>
+        </a>       
+        <a class="socialContainer containerFour" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+          <i class='bx bxl-linkedin sociali'></i>
+          <div class="tooltip">LinkedIn</div>
+        </a>
+        <a class="socialContainer containerFive" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+          <i class='bx bxl-youtube sociali'></i>
+          <div class="tooltip">Youtube</div>
+        </a>
+        <a class="socialContainer containerSix" href="https://www.snapchat.com" target="_blank" rel="noopener noreferrer">
+          <i class='bx bxl-snapchat sociali'></i>
+          <div class="tooltip">Snapchat</div>
+        </a>      
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="disclaimer">
+        <p>&copy; 2024 JoyStick. All rights reserved.
+          Designed and developed by JoyStick.</p>
+        <p>ㅤ<a href="/privacy-policy">Privacy Policy </a>ㅤ|ㅤ <a href="/terms-of-service">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+  <script src="script-home.js"></script>
+</body>
+</html>

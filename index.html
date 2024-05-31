@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>JoyStick</title>
+  <link rel="stylesheet" href="styles-logreg.css  ">
+  <link rel="icon" type="image/x-icon" href="assets/icon.png">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <div class="circle"></div>
+
+<div class="container" id="container">
+  <div class="form-container sign-up-container">
+    <form action="#" id="signup-form">
+      <h1>Create Account</h1>
+      <span>or use a name/nickname for registration</span>
+      <input type="text" placeholder="User Name" id="signup-username" required/>
+      <input type="text" placeholder="Confirm User Name" id="signup-confirm-username" required/>
+      <input type="password" placeholder="Password" id="signup-password" required/>
+      <span class="password-toggle-icon" id="signup-show"><i class='bx bx-show'></i></span>
+      <br>
+      <button type="submit" id="signup-submit">Sign Up</button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form action="#" id="signin-form">
+      <h1>Sign in</h1>
+      <span>or use your account</span>
+      <input type="text" placeholder="User Name" id="signin-username" required/>
+      <input type="password" placeholder="Password" id="signin-password" required/>
+      <span class="password-toggle-icon" id="signin-show"><i class='bx bx-show'></i></span>
+      <a href="#" id="forgot">Forgot your password?</a>
+      <button type="submit" id="signin-submit">Sign In</button>
+    </form>
+  </div>
+  <div class="form-container forgot-password-container">
+    <form action="#" id="forgot-form">
+      <h1>Forgot Password</h1>
+      <br> 
+      <span>Enter your username to retrieve your password</span>
+      <br>
+      <input type="text" placeholder="User Name" id="forgot-username"/>
+      <br>
+      <button id="forgot-submit">Retrieve Password</button>
+      <a href="#" id="back-to-login">Back to Login</a>
+      <p id="retrieved-password" style="display:none;">Your password is: <span id="password-display"></span></p>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <div class="logo"><h1><i class='bx bx-joystick-button'></i><span>J</span>oy<span>S</span>tick</h1></div>
+        <h1>Welcome Back!</h1>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="logIn">Sign In</button>
+      <div class="social-container">
+        <a href="#" class="social"><i class='bx bxl-facebook-circle'></i></a>
+        <a href="#" class="social"><i class="bx bxl-google"></i></a>
+        <a href="#" class="social"><i class="bx bxl-github"></i></a>
+        </div>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <div class="logo"><h1><i class='bx bx-joystick-button'></i><span>J</span>oy<span>S</span>tick</h1></div>
+        <h1>Hello, Friend!</h1>
+        <p>Enter your personal details and start journey with us</p>
+        <button class="ghost" id="signUp">Sign Up</button>
+        <div class="social-container">
+          <a href="#" class="social"><i class='bx bxl-facebook-circle'></i></a>
+          <a href="#" class="social"><i class="bx bxl-google"></i></a>
+          <a href="#" class="social"><i class="bx bxl-github"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <script src="script-logreg.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</body>
+</html>
