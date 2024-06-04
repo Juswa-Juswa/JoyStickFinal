@@ -507,6 +507,7 @@ downloadReceiptBtn.addEventListener('click', () => {
     });
     paymentPanel.classList.add('hide');
     receiptPanel.classList.add('hide');
+    cover.style.display = 'none';
 });
 
 //- - - - - - - - - - - - - - - - -> Video Rotation After Every End
