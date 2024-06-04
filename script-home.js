@@ -504,9 +504,9 @@ downloadReceiptBtn.addEventListener('click', () => {
         covers.forEach(function(cover) {
             cover.style.display = 'none';
         });
-        paymentPanel.classList.add('hide');
-        receiptPanel.classList.add('hide');
     });
+    paymentPanel.classList.add('hide');
+    receiptPanel.classList.add('hide');
 });
 
 //- - - - - - - - - - - - - - - - -> Video Rotation After Every End
